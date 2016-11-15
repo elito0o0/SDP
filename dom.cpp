@@ -13,15 +13,15 @@ void PolskiZapis(ifstream& f)
 	while (!f.eof())
 	{
 		p = f.peek();
-		if (p >= '0' && p <= '9')
+		if (p >='0' && p <= '9')
 		{
 			f >> n;
 			st.push(n);
+		
 			
 		}
 		else {
 			f >> op;
-			cout << op << " ";
 			switch (op)
 			{
 			case '+': {
@@ -68,7 +68,7 @@ void PolskiZapis(ifstream& f)
 					b = st.top();
 					st.pop();
 				}
-				c = a - b;
+				c = b - a;
 				st.push(c);
 			}break;
 			case '/': {
@@ -90,7 +90,7 @@ void PolskiZapis(ifstream& f)
 					b = st.top();
 					st.pop();
 				}
-				c = a / b;
+				c = b /a ;
 				st.push(c);
 			}break;
 			case '*': {
@@ -117,7 +117,13 @@ void PolskiZapis(ifstream& f)
 			}break;
 			}
 		}
+		if (f.peek() == ';') {
+			cout << st.top() << " ";
+			st.pop();
+			f.ignore();
+		}
 
+		f.ignore(1, ' ');
 	}
 	while (!st.empty())
 	{
