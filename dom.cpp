@@ -90,7 +90,7 @@ void PolskiZapis(ifstream& f)
 					b = st.top();
 					st.pop();
 				}
-				c = a + b;
+				c = a / b;
 				st.push(c);
 			}break;
 			case '*': {
