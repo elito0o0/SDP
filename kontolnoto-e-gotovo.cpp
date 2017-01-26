@@ -106,6 +106,37 @@ list<int> kth_level(Graph& g, int k,int room) {
 
 	return nodes_on_kth_level;
 }
+void minRooms(Graph& g, int room) {
+	list<int> cur_nodesMin = kth_level(g, 1, room);
+	int day;
+	for (int i = 2; i <= bfs(g, room); i++) {
+		if (kth_level(g, i, room).size() < cur_nodesMin.size())
+		{
+			cur_nodesMin = kth_level(g, i, room);
+			day = i;
+		}
+	}
+	cout << "In day " << day << " min rooms infected " << endl;
+	for (int n : cur_nodesMin) {
+		cout << n << " ";
+	}
+}
+void maxRooms(Graph& g, int room) {
+	list<int> cur_nodesMax = kth_level(g, 1, room);
+	int day=1;
+	for (int i = 2; i <= bfs(g, room); i++) {
+		if (kth_level(g, i, room).size() > cur_nodesMax.size())
+		{
+			cur_nodesMax = kth_level(g, i, room);
+			day = i;
+			break;
+		}
+	}
+	cout << "In day " << day << " max rooms infected " << endl;
+	for (int n : cur_nodesMax) {
+		cout << n << " ";
+	}
+}
 int main() {
 	Graph g;
 	g.add_vertex(101).add_vertex(104).add_vertex(107).add_vertex(210).add_vertex(310).add_vertex(130).add_vertex(340).add_vertex(317).add_vertex(613).add_vertex(415).add_vertex(623)
@@ -116,6 +147,9 @@ int main() {
 	for (int n : l) {
 		cout << n << endl;
 	}
+	minRooms(g, 101);
+	cout << "\n";
+	maxRooms(g, 101);
 	system("pause");
 	return 0;
 }
